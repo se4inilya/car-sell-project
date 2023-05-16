@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
 
-describe('Auth system (e2e)', () => {
+describe('Authentication System', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
@@ -15,11 +15,12 @@ describe('Auth system (e2e)', () => {
     await app.init();
   });
 
-  it('handles signup request', () => {
-    const email = 'qqq@gmail.com';
+  it('handles a signup request', () => {
+    const email = 'asdlkq4321@akl.com';
+
     return request(app.getHttpServer())
       .post('/auth/signup')
-      .send({ email, password: 'qqq' })
+      .send({ email, password: 'alskdfjl' })
       .expect(201)
       .then((res) => {
         const { id, email } = res.body;
@@ -28,12 +29,12 @@ describe('Auth system (e2e)', () => {
       });
   });
 
-  it('sign up and get logged in user', async () => {
-    const email = 'qqq@gmail.com';
+  it('signup as a new user then get the currently logged in user', async () => {
+    const email = 'asdf@asdf.com';
 
     const res = await request(app.getHttpServer())
       .post('/auth/signup')
-      .send({ email, password: 'qqq' })
+      .send({ email, password: 'asdf' })
       .expect(201);
 
     const cookie = res.get('Set-Cookie');
